@@ -1,0 +1,3 @@
+<template>
+  homeproduct
+</template>
