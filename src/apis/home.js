@@ -13,7 +13,7 @@ export function getBannerAPI() {
  */
 export const findNewAPI = () => {
   return httpInstance({
-    url:'/home/new'
+    url: '/home/new'
   })
 }
 
@@ -23,7 +23,18 @@ export const findNewAPI = () => {
  * @return {*}
  */
 export const findHotAPI = () => {
-  return  httpInstance({
+  return httpInstance({
     url: '/home/hot'
+  })
+}
+
+/**
+ * @description: 获取所有商品模块
+ * @param {*}
+ * @return {*}
+ */
+export const findGoodsAPI = () => {
+  return httpInstance({
+    url: '/home/goods'
   })
 }
