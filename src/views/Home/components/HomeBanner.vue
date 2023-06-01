@@ -8,7 +8,7 @@ const getBanner = async () => {
   const res = await getBannerAPI()
   bannerList.value = res.result
 }
-onMounted(() => { getBanner() })
+onMounted(() => getBanner())
 </script>
 
 
