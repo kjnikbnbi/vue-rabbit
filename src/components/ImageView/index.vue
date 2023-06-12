@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useMouseInElement } from '@vueuse/core'
+
 
 // 图片列表
 const imageList = [
@@ -13,16 +15,47 @@ const activeIndex = ref(0)
 const enterhandler = (i) => {
   activeIndex.value = i
 }
+// 图片放大器
+const target = ref(null)
+const { elementX, elementY, isOutside } = useMouseInElement(target)
+const left = ref(0)
+const top = ref(0)
+const positionX = ref(0)
+const positionY = ref(0)
+watch([elementX, elementY], () => {
+  if (isOutside.value) return
+  if (elementX.value > 100 && elementX.value < 300) {
+    left.value = elementX.value - 100
+  }
+  if (elementY.value > 100 && elementY.value < 300) {
+    top.value = elementY.value - 100
+  }
+  if (elementX.value > 300) {
+    left.value = 200
+  }
+  if (elementX.value < 100) {
+    left.value = 0
+  }
+  if (elementY.value > 300) {
+    top.value = 200
+  }
+  if (elementY.value < 100) {
+    top.value = 0
+  }
+  positionX.value = -left.value
+  positionY.value = -top.value
+})
 </script>
 
 
 <template>
+  {{ elementX }} {{ elementY }} {{ isOutside }}
   <div class="goods-image">
     <!-- 左侧大图-->
     <div class="middle" ref="target">
       <img :src="imageList[activeIndex]" alt="" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `0px`, top: `0px` }"></div>
+      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }" v-show="!isOutside"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
@@ -34,10 +67,10 @@ const enterhandler = (i) => {
     <div class="large" :style="[
       {
         backgroundImage: `url(${imageList[0]})`,
-        backgroundPositionX: `0px`,
-        backgroundPositionY: `0px`,
+        backgroundPositionX: `${positionX}px`,
+        backgroundPositionY: `${positionY}px`,
       },
-    ]" v-show="false"></div>
+    ]" v-show="!isOutside"></div>
   </div>
 </template>
 
