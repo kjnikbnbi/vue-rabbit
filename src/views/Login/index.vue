@@ -21,7 +21,6 @@ const rules = {
   agree: [
     {
       validator: (rules, value, callback) => {
-        console.log(value)
         if (value) {
           callback()
         } else {
