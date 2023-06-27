@@ -32,6 +32,7 @@ const addCart = () => {
       id: goods.value.id,
       name: goods.value.name,
       picture: goods.value.mainPictures[0],
+      price: goods.value.price,
       count: count.value,
       skuId: skuObj.skuId,
       attrsText: skuObj.specsText,
@@ -92,8 +93,8 @@ const addCart = () => {
               <p class="g-name">{{ goods.name }}</p>
               <p class="g-desc">{{ goods.desc }}</p>
               <p class="g-price">
-                <span>{{ goods.oldPrice }}</span>
                 <span>{{ goods.price }}</span>
+                <span>{{ goods.oldPrice }}</span>
               </p>
               <div class="g-service">
                 <dl>
