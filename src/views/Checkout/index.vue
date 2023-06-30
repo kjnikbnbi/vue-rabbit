@@ -3,6 +3,7 @@ import { getCheckInfoAPI, createOrderAPI } from '@/apis/checkout'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCartStore } from '@/stores/cartStore'
+
 const cartStore = useCartStore()
 const router = useRouter()
 const checkInfo = ref({}) // 订单对象
